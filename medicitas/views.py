@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
 from .serializer import PacienteSerializer, MedicoSerializer, EspecialidadSerializer,CitaMedicaSerializer, HistorialMedicoSerializer
-from .models import Paciente, Medico, Especialidad, CitaMedica, HistorialMedico, Perfil, Administrador, Medicamento, Receta,EstadoPaciente
+from .models import Paciente, Medico, Especialidad, CitaMedica, HistorialMedico, Perfil, Administrador, Medicamento, Receta,EstadoPaciente, Emergencia
 from django.contrib.auth import login, authenticate
-from .forms import CustomAuthenticationForm,NuevaRecetaForm, RegistroForm, RegistroAdminForm, EspecialidadForm,RegistroMedicoForm, MedicamentoForm, HistorialMedicoForm, DiagnosticoForm, EstadoPacienteForm
+from .forms import CustomAuthenticationForm,NuevaRecetaForm, RegistroForm, RegistroAdminForm, EspecialidadForm,RegistroMedicoForm, MedicamentoForm, HistorialMedicoForm, DiagnosticoForm, EstadoPacienteForm,EmergenciaForm
 from datetime import datetime, timedelta,date
 from django.utils import timezone
  
@@ -413,8 +413,28 @@ def perfil(request):
     return render(request, 'paciente/perfil.html', {'paciente': paciente})
 #return render(request,'perfil.html')
 
+@login_required
+def registrar_emergencia(request):
+    paciente = request.user.paciente  # Obtener el paciente logueado
+    if request.method == 'POST':
+        form = EmergenciaForm(request.POST)
+        if form.is_valid():
+            emergencia = form.save(commit=False)
+            emergencia.paciente = paciente  # Asignar el paciente logueado
+            emergencia.save()
+            return redirect('registrar_emergencia')  # Redirigir a la lista de emergencias o a donde desees
+    else:
+        form = EmergenciaForm()
+    
+    return render(request, 'paciente/registrar_emergencia.html', {'form': form, 'paciente': paciente})
+@login_required
+def eliminar_emergencia(request, emergencia_id):
+    paciente = request.user.paciente  # Obtener el paciente logueado
+    emergencia = get_object_or_404(Emergencia, id=emergencia_id, paciente=paciente)  # Obtener la emergencia
 
-
+    if request.method == 'POST':
+        emergencia.delete()  # Eliminar la emergencia
+        return redirect('/registrar_emergencia')  # Redirigir a la lista de emergencias o donde desees
 
 #**********************vistas de medico**************************#
 def medico_dashboard(request):
@@ -572,12 +592,118 @@ def perfilmedico(request):
     medicos = Medico.objects.get(usuario=request.user)
       # Obtén el paciente asociado al usuario
     return render(request, 'medico/perfilmedico.html', {'medicos': medicos})
+@login_required
+def visualizar_emergencia(request):
+    # Obtener todas las emergencias registradas en la base de datos
+    emergencias = Emergencia.objects.all()  # Obtener todas las emergencias
+
+    def calcular_estado(frecuencia_cardiaca, frecuencia_respiratoria, presion_arterial, saturacion_oxigeno, nivel_conciencia):
+        # Calcular estado de frecuencia cardíaca
+        if 60 <= frecuencia_cardiaca <= 100:
+            fc_estado = "Normal"
+            fc_puntos = 0
+        elif 100 < frecuencia_cardiaca <= 120:
+            fc_estado = "Alerta Moderada"
+            fc_puntos = 1
+        elif 121 <= frecuencia_cardiaca <= 140:
+            fc_estado = "Alerta Severa"
+            fc_puntos = 2
+        else:
+            fc_estado = "Crítico"
+            fc_puntos = 3
+
+        # Calcular estado de frecuencia respiratoria
+        if 12 <= frecuencia_respiratoria <= 20:
+            fr_estado = "Normal"
+            fr_puntos = 0
+        elif 21 <= frecuencia_respiratoria <= 24:
+            fr_estado = "Alerta Moderada"
+            fr_puntos = 1
+        elif 25 <= frecuencia_respiratoria <= 30:
+            fr_estado = "Alerta Severa"
+            fr_puntos = 2
+        else:
+            fr_estado = "Crítico"
+            fr_puntos = 3
+
+        # Calcular estado de presión arterial
+        if 90 <= presion_arterial <= 140:
+            pa_estado = "Normal"
+            pa_puntos = 0
+        elif 140 < presion_arterial <= 160:
+            pa_estado = "Alerta Moderada"
+            pa_puntos = 1
+        elif 161 <= presion_arterial <= 180:
+            pa_estado = "Alerta Severa"
+            pa_puntos = 2
+        else:
+            pa_estado = "Crítico"
+            pa_puntos = 3
+
+        # Calcular estado de saturación de oxígeno
+        if saturacion_oxigeno >= 95:
+            so_estado = "Normal"
+            so_puntos = 0
+        elif 91 <= saturacion_oxigeno < 95:
+            so_estado = "Alerta Moderada"
+            so_puntos = 1
+        elif 85 <= saturacion_oxigeno < 91:
+            so_estado = "Alerta Severa"
+            so_puntos = 2
+        else:
+            so_estado = "Crítico"
+            so_puntos = 3
+
+        # Calcular estado de nivel de conciencia
+        if nivel_conciencia == 0:
+            nc_estado = "Normal"
+            nc_puntos = 0
+        elif nivel_conciencia == 1:
+            nc_estado = "Alerta Moderada"
+            nc_puntos = 1
+        elif nivel_conciencia == 3:
+            nc_estado = "Alerta Severa"
+            nc_puntos = 2
+        else:
+            nc_estado = "Crítico"
+            nc_puntos = 3
+
+        # Sumar puntos
+        total_puntos = fc_puntos + fr_puntos + pa_puntos + so_puntos + nc_puntos
+
+        # Clasificación de urgencia
+        if total_puntos <= 4:
+            urgencia = "No urgente"
+        elif total_puntos <= 9:
+            urgencia = "Urgente"
+        elif total_puntos <= 14:
+            urgencia = "Muy urgente"
+        else:
+            urgencia = "Emergencia"
+
+        return (fc_estado, fr_estado, pa_estado, so_estado, nc_estado, total_puntos, urgencia)
+
+    # Procesar cada emergencia para calcular su estado
+    for emergencia in emergencias:
+        (emergencia.fc_estado, emergencia.fr_estado, emergencia.pa_estado,
+         emergencia.so_estado, emergencia.nc_estado, emergencia.total_puntos, 
+         emergencia.urgencia) = calcular_estado(
+            emergencia.frecuencia_cardiaca,
+            emergencia.frecuencia_respiratoria,
+            emergencia.presion_arterial,
+            emergencia.saturacion_oxigeno,
+            emergencia.nivel_conciencia
+        )
+
+    return render(request, 'medico/visualizar-emergencia.html', {'emergencias': emergencias})
+
 #*******************************************************
 def iniciomedico(request):
     return render(request,'medico/iniciomedico.html')
 
 def principal(request):
     return render(request,'principal.html')
+
 
 
 

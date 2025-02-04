@@ -1,0 +1,49 @@
+<!-- medico/visualizar_emergencias.html -->
+{% extends "medico/basemedico.html"%}
+{% block principal %}
+<section class="contenedor-emergencias">
+    <h1>Visualizar Emergencias Registradas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Frecuencia Cardíaca</th>
+                <th>Estado FC</th>
+                <th>Frecuencia Respiratoria</th>
+                <th>Estado FR</th>
+                <th>Presión Arterial</th>
+                <th>Estado PA</th>
+                <th>Saturación de Oxígeno</th>
+                <th>Estado SO</th>
+                <th>Nivel de Conciencia</th>
+                <th>Estado NC</th>
+                <th>Puntos</th>
+                <th>Urgencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emergencia in emergencias %}
+                <tr>
+                    <td>{{ emergencia.fecha_registro }}</td>
+                    <td>{{ emergencia.frecuencia_cardiaca }}</td>
+                    <td>{{ emergencia.fc_estado }}</td>
+                    <td>{{ emergencia.frecuencia_respiratoria }}</td>
+                    <td>{{ emergencia.fr_estado }}</td>
+                    <td>{{ emergencia.presion_arterial }}</td>
+                    <td>{{ emergencia.pa_estado }}</td>
+                    <td>{{ emergencia.saturacion_oxigeno }}</td>
+                    <td>{{ emergencia.so_estado }}</td>
+                    <td>{{ emergencia.nivel_conciencia }}</td>
+                    <td>{{ emergencia.nc_estado }}</td>
+                    <td>{{ emergencia.total_puntos }}</td>
+                    <td>{{ emergencia.urgencia }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="13">No hay emergencias registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

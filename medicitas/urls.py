@@ -35,6 +35,7 @@ urlpatterns = [
     path('editar_estado_paciente/<int:estado_id>/', views.editar_estado_paciente, name='editar_estado_paciente'),
     path('nueva_receta/', views.nueva_receta),
     path('perfilmedico/', views.perfilmedico),
+    path('visualizar_emergencia/', views.visualizar_emergencia, name='visualizar_emergencias'),
 
 
     #*****************URLs Pacientes***********#
@@ -49,6 +50,8 @@ urlpatterns = [
     path('registrar-cita/', views.registrarCita, name='registrar_cita'),
     path('api/medicos/<int:especialidad_id>/', views.cargarMedicos, name='cargar_medicos'),
     path('api/disponibilidad/<int:medico_id>/<str:fecha>/', views.cargarDisponibilidad, name='cargar_disponibilidad'),
+    path('registrar-emergencia/', views.registrar_emergencia, name='registrar_emergencia'),
+    path('eliminar_emergencia/', views.eliminar_emergencia, name='eliminar_emergencia'),
 
     #*****************URLs administrador***********#
     path('perfiladministrador/', views.perfiladministrador),

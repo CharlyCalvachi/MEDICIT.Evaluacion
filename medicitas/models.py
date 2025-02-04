@@ -162,6 +162,18 @@ class Medico(models.Model):  # Define el modelo para Médico
     def __str__(self):  # Método para representar el médico como cadena
         return f"{self.nombres} {self.apellidos}"  # Retorna el nombre completo del médico
    
+class Emergencia(models.Model):  # Modelo para Emergencia
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='emergencias')
+    especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
+    frecuencia_cardiaca = models.IntegerField()
+    frecuencia_respiratoria = models.IntegerField()
+    presion_arterial = models.IntegerField()
+    saturacion_oxigeno = models.IntegerField()
+    nivel_conciencia = models.IntegerField()
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Emergencia de {self.paciente} - {self.fecha_registro}'
 
 
 class CitaMedica(models.Model):  # Define el modelo para Cita Médica

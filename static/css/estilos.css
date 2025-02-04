@@ -513,3 +513,81 @@ h2 {
   margin: 5px 0;
 }
 
+/* ***********estilos de la paantala de regitro de emergencia ***************/
+.registro-emergencia-titulo {
+  text-align: center;
+  color: #000000; /* Color principal */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.contenedor-registro-emergencia {
+  padding: 20px;
+  background-color: #d3f0ff;
+  font-family: Arial, sans-serif;
+  margin: 0 18px 15px;
+}
+.registro-emergencia-form {
+  width: 500px;
+  background-color: #ecf0f1; /* Fondo del formulario */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+margin: auto;
+  
+}
+
+.registro-emergencia-boton {
+  background-color: #27ae60; /* Color del botón */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.registro-emergencia-boton:hover {
+  background-color: #219653; /* Color del botón al pasar el ratón */
+}
+
+.registro-emergencia-enlace {
+  display: inline-block;
+  margin-top: 15px;
+  color: #2980b9; /* Color del enlace */
+  text-decoration: none;
+}
+
+.registro-emergencia-enlace:hover {
+  text-decoration: underline; /* Subrayar al pasar el ratón */
+}
+
+.registro-emergencia-subtitulo {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #000000; /* Color del subtítulo */
+}
+
+.registro-emergencia-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.registro-emergencia-tabla th, .registro-emergencia-tabla td {
+  border: 1px solid #bdc3c7; /* Bordes de la tabla */
+  padding: 10px;
+  text-align: left;
+}
+
+.registro-emergencia-tabla th {
+  background-color: #3498db; /* Fondo de encabezados */
+  color: rgb(0, 0, 0);
+}
+
+.registro-emergencia-tabla tr:nth-child(even) {
+  background-color: #f2f2f2; /* Fondo de filas pares */
+}
+
+.registro-emergencia-tabla tr:hover {
+  background-color: #dfe6e9; /* Fondo al pasar el ratón sobre una fila */
+}

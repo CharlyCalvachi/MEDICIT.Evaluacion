@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Paciente,Receta, Administrador, Perfil, Especialidad, Medicamento, HistorialMedico, Diagnostico, EstadoPaciente,Medico, CitaMedica# Asegúrate de importar el modelo Paciente y administrador
+from .models import Paciente,Receta, Administrador, Perfil, Especialidad, Medicamento, HistorialMedico, Diagnostico, EstadoPaciente,Emergencia,  Medico, CitaMedica# Asegúrate de importar el modelo Paciente y administrador
 from django.utils import timezone
 
 #--------------Formulario de inicio de secion ----------#
@@ -233,3 +233,24 @@ class EstadoPacienteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EstadoPacienteForm, self).__init__(*args, **kwargs)
         self.fields['paciente'].queryset = Paciente.objects.all()   
+
+ #--------------Formulario de registro de emergencia ----------#
+
+class EmergenciaForm(forms.ModelForm):
+    NIVEL_CONCIENCIA_CHOICES = [
+        (0, 'Alerta'),
+        (1, 'Responde a voz'),
+        (3, 'Responde al dolor'),
+        (5, 'No responde'),
+    ]
+
+    frecuencia_cardiaca = forms.IntegerField(label='Frecuencia Cardíaca')
+    frecuencia_respiratoria = forms.IntegerField(label='Frecuencia Respiratoria')
+    presion_arterial = forms.IntegerField(label='Presión Arterial')
+    saturacion_oxigeno = forms.IntegerField(label='Saturación de Oxígeno')
+    nivel_conciencia = forms.ChoiceField(choices=NIVEL_CONCIENCIA_CHOICES, label='Nivel de Conciencia')
+    especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all(), label='Especialidad')
+
+    class Meta:
+        model = Emergencia
+        fields = ['frecuencia_cardiaca', 'frecuencia_respiratoria', 'presion_arterial', 'saturacion_oxigeno', 'nivel_conciencia', 'especialidad']

@@ -1,0 +1,51 @@
+{% extends "paciente/base.html" %}
+{% block principal %}
+<section class="contenedor-registro-emergencia">
+    <h1 class="registro-emergencia-titulo">Registrar Emergencia para {{ paciente }}</h1>
+    <form method="post" class="registro-emergencia-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="registro-emergencia-boton">Registrar</button>
+    </form>
+
+    <h2 class="registro-emergencia-subtitulo">Emergencias Registradas</h2>
+    <table class="registro-emergencia-tabla">
+        <thead>
+            <tr>
+                <th>Fecha de Registro</th>
+                <th>Especialidad</th>
+                <th>Frecuencia Cardíaca</th>
+                <th>Frecuencia Respiratoria</th>
+                <th>Presión Arterial</th>
+                <th>Saturación de Oxígeno</th>
+                <th>Nivel de Conciencia</th>
+                <th>Acciones</th> <!-- Nueva columna para acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for emergencia in paciente.emergencias.all %}
+                <tr>
+                    <td>{{ emergencia.fecha_registro }}</td>
+                    <td>{{ emergencia.especialidad }}</td>
+                    <td>{{ emergencia.frecuencia_cardiaca }}</td>
+                    <td>{{ emergencia.frecuencia_respiratoria }}</td>
+                    <td>{{ emergencia.presion_arterial }}</td>
+                    <td>{{ emergencia.saturacion_oxigeno }}</td>
+                    <td>{{ emergencia.nivel_conciencia }}</td>
+                    <td>
+                        <form action="/eliminar_emergencia/" method="POST" class="form-eliminar-emergencia">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cita?');">Eliminar</button>
+                        </form>
+
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8">No hay emergencias registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
