@@ -1,0 +1,786 @@
+/*********************Estilos de plantilla "base" ***********************/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+      background-color:#ffffff;
+      color: rgb(0, 0, 0);
+      margin: auto;
+      width: 97%;
+  
+  }
+  header {
+      padding: 10px;
+      width: 97%;
+      margin: auto;
+    }
+    
+    header section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      color: #1F2B6C;
+      padding: 10px;
+    }
+    
+    .header-logo {
+      max-height: 60px;
+    }
+    
+    .header-info {
+      display: flex;
+      justify-content: space-between;
+  
+    }
+  
+     .header-info img  {
+      max-height: 40px;
+      margin-left: 30px;
+    }
+    
+    .header-info p {
+      margin: 0 10px;
+      font-family: "Arial", sans-serif;
+      font-weight: bold;
+      text-decoration: double;
+   
+    }
+    
+    .header-title {
+      margin: 0 0 0 2%;
+      font-size: 50px;
+      color: #1F2B6C;
+      font-family:Georgia, 'Times New Roman', Times, serif
+      
+    }
+    .header-title2 {
+      margin: 0;
+      font-size: 50px;
+      color: #007bff;
+      font-family:Georgia, 'Times New Roman', Times, serif
+    }
+  
+    header nav {
+      
+      display: flex;
+      justify-content:end; 
+      align-items: center; 
+      background-color: #b5b5b5;
+      border-radius: 10pX;
+    }
+    header nav a {
+      color: #333;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: bold;text-decoration: double;
+    }
+  
+    header nav a:hover {
+      color: #007bff;
+    }
+    .search-form {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+    
+    .search-input {
+      margin-left: 15px;
+      flex-grow: 1;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      font-size: 14px;
+    }
+    
+     /**********************Boton de busqueda**********************/
+    .search-button {
+      background-color: #ffffff;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 40%;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    
+    .search-button i {
+      font-size: 16px;
+    }
+  
+    .search-icon {
+      width: 20px;
+      height: 20px;
+    }
+  /*****************Pie de pagina plantilla Base*****************/
+    footer {
+      background-color: #0A7379;
+      color: #ffffff;
+      padding: 5px;
+      width: 97%;
+      box-sizing: border-box;
+      margin: auto;
+  }
+  
+  .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+  }
+  
+  .footer-social {
+      display: flex;
+      align-items: center;
+  }
+  
+  .social-icon {
+      width: 50px;
+      height: 50px; 
+      margin-left: 10px; 
+  }
+  
+  footer p {
+      margin: 0 10px;
+  }
+
+  /**********************Inicio perfil medico ****************/
+.contenedor-perfil {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 97%;
+  }
+  
+  .perfilm {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #e9e9e9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: auto auto 15px;
+    
+  }
+  
+  .editar-perfil {
+    padding: 10px 20px;
+    background-color: #0A7379;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: space-between;
+    margin-left: auto;
+  }
+  
+  .imagen-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info h2, .user-info p {
+    margin: 0;
+  }
+  
+  .user-info p {
+    color: #666;
+  }
+  
+  .personal-info {
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    background-color: #e9e9e9;
+    margin: auto;
+  
+  }
+  
+  .personal-info h3 {
+    margin-top: 0;
+  }
+  
+  .form label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .input-field {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+  }
+  
+  .boton-actualizarPerfil {
+    display: block;
+    width: 25%;
+    padding: 10px;
+    background-color: #0A7379;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+    /**********************fin perfil de medico  ****************/
+    /***************Inicio pagina  Medicos ***********************/
+  
+    
+  main {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+  }
+  
+  .doctores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .campo-doctor {
+    text-align:left;
+    background-color: #f5f5f5;
+    border-radius: 3%;
+  }
+  
+  .campo-doctor img {
+    width: 100%;
+    height: auto;
+    border-radius: 10%; /* Opcional: hace las fotos circulares */
+  }
+  
+  .campo-doctor h2 {
+    margin: 10px 0 5px 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .campo-doctor p {
+    margin:0;
+    font-size: 0.9em;
+    color: #010101;
+    text-decoration: double;
+  
+  }
+/****************plantilla de  citas programadas *******************/
+.contenedor-citas-Agendadas {
+    font-family: Arial, sans-serif;
+    background-color: #d3f0ff;
+    margin: 0 18px 15px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.tabla-citas-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabla-citas {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-citas th, .tabla-citas td {
+
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-color: #1900ff;
+}
+
+.tabla-citas th {
+    font-weight: bold;
+    background-color: #007BFF; /* Plomo azulversoso */
+    color: white;
+}
+
+.tabla-citas td button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tabla-citas td button.actualizar_estado {
+    background-color: #007bff ;
+    color: white;
+}
+
+
+.tabla-citas td button:hover {
+    background-color: #87e289;
+    color: #010101;
+}
+
+.tabla-citas tr:nth-child(even) {
+    background-color: #ddd;
+}
+
+.tabla-citas tr:hover {
+    background-color: #d3e9ff;
+}
+
+/* Estilos específicos para la lista de pacientes */
+.contenedor-pacientes {
+  font-family: Arial, sans-serif;
+  background-color: #d3f0ff;
+  margin: 0 18px 15px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.table-pacientes-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
+}
+
+.table-pacientes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-pacientes th, .table-pacientes td {
+  border: 1px solid #007BFF;
+  padding: 10px;
+  text-align: center;
+}
+
+.table-pacientes th {
+  background-color: #007BFF;
+  color: white;
+}
+
+.btn-ir-historial {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-ir-historial:hover {
+  background-color: #218838;
+}
+
+/* Estilos específicos para el historial médico */
+.form-historial {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.datos-historial {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  background-color: #e9ecef;
+}
+
+.btn-guardar {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-guardar:hover {
+  background-color: #0056b3;
+}
+
+/* CSS para la pantalla de emitir receta - registrar nueva receta */
+.contenedor-nueva-receta {
+  font-family: Arial, sans-serif;
+  background-color: #d3f0ff;
+  margin: 0 18px 15px;
+  padding: 0;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  height: 128vh;
+
+}
+.container-nueva-receta-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+}
+
+
+.nueva-receta-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.nueva-receta-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  border-color: #007BFF;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+
+}
+
+.form-group input{
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+}
+.errorlist {
+  color: red;
+  list-style-type: none;
+  padding: 0;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* CSS para la pantalla de emitir diagnóstico - registrar nuevo diagnóstico */
+.contenedor-nuevo-diagnostico {
+  font-family: Arial, sans-serif;
+  background-color: #d3f0ff;
+  margin: 0 18px 15px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 128vh;
+}
+
+.container-nuevo-diagnostico-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.nuevo-diagnostico-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.nuevo-diagnostico-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.nuevo-diagnostico-fields {
+  margin-bottom: 15px;
+}
+
+.table-estado {
+  text-decoration: #0056b3;
+}
+
+/* CSS para la gestión de estado del paciente */
+.contenedor-gestionar-estado {
+  font-family: Arial, sans-serif;
+  background-color: #e8f4f8;
+  margin: 0 18px 15px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.container-gestionar-estado-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.gestionar-estado-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.gestionar-estado-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.gestionar-estado-fields {
+  margin-bottom: 20px;
+}
+
+.table-gestionar-estado {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-gestionar-estado th,
+.table-gestionar-estado td {
+  border: 1px solid #007BFF;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-gestionar-estado th {
+  background-color: #007BFF;
+  color: white;
+}
+
+.gestionar-estado-list-title {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.btn-edit.gestionar-estado-edit {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-edit.gestionar-estado-edit:hover {
+  background-color: #218838;
+}
+
+/* CSS para la edición del estado del paciente */
+.contenedor-editar-estado {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0 18px 15px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.container-editar-estado-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.editar-estado-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.editar-estado-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.editar-estado-fields {
+  margin-bottom: 20px;
+}
+/***************************** estilos de historial medico************************** */
+
+.contenedor-historial-unico {
+  padding: 20px;
+  background-color: #d3f0ff;
+  font-family: Arial, sans-serif;
+  margin: 0 18px 15px;
+}
+
+.historial-unico-container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.titulo-historial {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-selector {
+  margin-bottom: 20px;
+}
+
+.label-selector {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.select-paciente {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.subtitulo-datos,
+.subtitulo-citas,
+.subtitulo-recetas,
+.subtitulo-diagnosticos,
+.subtitulo-estado {
+  margin-top: 30px;
+  font-size: 20px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.tabla-datos,
+.tabla-estado {
+  width: 100%;
+  border-collapse: collapse;
+  border-color: #010101;
+  margin-top: 10px;
+  
+}
+
+.th-dato,
+.th-estado {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.td-dato,
+.td-estado,
+.th-dato,
+.th-estado {
+  padding: 10px;
+  border: 1px solid #1900ff;
+}
+
+.td-vacio {
+  text-align: center;
+  font-style: italic;
+  color: #999;
+}
+
+.foto-perfil {
+  margin: 0 0 0 25%;
+  max-width: 200px;
+  border-radius: 10%;
+}
+.tabla-datosp {
+
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-datosp th, .tabla-datosp td {
+
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  border-color: #1900ff;
+}
+
+.tabla-datosp th {
+  font-weight: bold;
+  background-color: #007BFF; /* Plomo azulversoso */
+  color: white;
+}
+
+
+
+.tabla-datosp tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+.tabla-datosp tr:hover {
+  background-color: #d3e9ff;
+}

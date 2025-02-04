@@ -1,0 +1,39 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+<section class="contenedor-nueva-receta">
+    <div class="container-nueva-receta-container">
+        <h1 class="nueva-receta-title">Registrar Nueva Receta</h1>
+    
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }} nueva-receta-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    
+        <form method="POST" class="nueva-receta-form" novalidate>
+            {% csrf_token %}
+            
+            <div class="nueva-receta-fields">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+    
+            <button type="submit" class="btn btn-primary nueva-receta-submit">Registrar Receta</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "paciente/base.html" %}
+{% block principal%} 
+
+<section class="contenedor-perfil">
+    
+    <main>
+        <section class="perfil">
+            {% if paciente.foto_perfil %}
+            <img src="{{ paciente.foto_perfil.url }}" alt="Foto de {{ paciente.nombres }}" class="imagen-perfil">
+        {% else %}
+            No disponible
+        {% endif %}
+            <div class="user-info">
+                <h2>{{ paciente.nombres }} {{ paciente.apellidos }}</h2>
+                <p>{{ paciente.email }}</p>  <!-- Asegúrate de que el email esté en el modelo -->
+            </div>
+            <button class="editar-perfil">Editar Perfil</button>
+        </section>
+        <section class="personal-info">
+            <h3>Datos Personales</h3>
+            <form action="/iniciarSesion/">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" class="input-field" placeholder="Shina Mery" value="{{ paciente.nombres }}">
+                
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" class="input-field" placeholder="Torigama shuan" value="{{ paciente.apellidos }}">
+                
+                <label for="cedula">Número de Cédula:</label>
+                <input type="text" id="cedula" name="cedula" class="input-field" placeholder="1726125311" value="{{ paciente.num_documento }}">
+                
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" class="input-field" placeholder="0981051046" value="{{ paciente.telefono }}">
+                
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" class="input-field" placeholder="Pichincha-Quito-Gualea Via Principal Km13.5" value="{{ paciente.direccion }}">
+                
+                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="input-field" value="{{ paciente.fecha_nacimiento|date:'Y-m-d' }}">
+                
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" class="input-field">
+                    <option value="masculino" {% if paciente.sexo == 'masculino' %}selected{% endif %}>Masculino</option>
+                    <option value="femenino" {% if paciente.sexo == 'femenino' %}selected{% endif %}>Femenino</option>
+                    <option value="otro" {% if paciente.sexo == 'otro' %}selected{% endif %}>Otro</option>
+                </select>
+                
+                <h3>Actualizar Contraseña</h3>
+                <label for="contraseña-actual">Contraseña Actual:</label>
+                <input type="password" id="contraseña-actual" name="contraseña-actual" class="input-field">
+                
+                <label for="nueva-contraseña">Nueva Contraseña:</label>
+                <input type="password" id="nueva-contraseña" name="nueva-contraseña" class="input-field">
+                
+                <button type="submit" class="boton-actualizarPerfil">Actualizar</button>
+            </form>
+        </section>
+    </main>
+</section>
+
+{% endblock %} 

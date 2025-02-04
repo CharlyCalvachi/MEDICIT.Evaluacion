@@ -1,0 +1,336 @@
+/*********************Estilos de plantilla "base1" ***********************/
+body{
+  background-image: linear-gradient(to right,#f3eaf3, #8ffcc9);
+    color: rgb(0, 0, 0);
+    margin: auto;
+    width: 97%;
+
+}
+header {
+    padding: 10px;
+    width: 97%;
+    margin: auto;
+  }
+  
+  header section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right,#f3eaf3, #8ffcc9);
+    color: #1F2B6C;
+    padding: 10px;
+  }
+  
+  .header-logo {
+    max-height: 60px;
+  }
+  
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+   .header-info img  {
+    max-height: 40px;
+    margin-left: 30px;
+  }
+  
+  .header-info p {
+    margin: 0 10px;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    text-decoration: double;
+ 
+  }
+  
+  .header-title {
+    margin: 0 0 0 2%;
+    font-size: 50px;
+  }
+  .header-title2 {
+    margin: 0;
+    font-size: 50px;
+    color: #007bff;
+  }
+
+  footer {
+    background-color: #0A7379;
+    color: #ffffff;
+    padding: 5px;
+    box-sizing: border-box;
+
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+}
+/**************iconos del footer**************/
+.social-icon {
+    width: 50px; 
+    height: 50px; 
+    margin-left: 10px; /* Espacio entre las imágenes */
+}
+
+footer p {
+  font-family: "Arial", sans-serif;
+    margin: 0 10px; 
+}
+
+/************** Inicio Pagina de Registro*************/
+.contenedor-registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+    background-color: #ffffff;
+  }
+  
+  .formulario-registro {
+    background-color: rgb(217, 217, 217);
+    padding: 0 80px 20px 80px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 100%;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .formulario-registro h1 {
+    color: #007bff;
+    text-align: center;
+    font-size: 40px;
+
+  }
+
+  .fila-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .grupo-formulario {
+    flex-basis: 48%;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
+  .botones-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .boton-registrar, .boton-cancelar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .boton-cancelar {
+    background-color: #f44336;
+  }
+  
+  .boton-registrar:hover {
+    background-color: #45a049;
+  }
+  
+  .boton-cancelar:hover {
+    background-color: #d32f2f;
+  }
+  /********************Inicio Pagina Inicio de sesion *****************/
+    .inicio-secion {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content:center;
+      align-items: center;
+      height: 90vh;
+      margin-left: 80px;
+      background-color: #f0f0f0;
+  }
+.login-container {
+    background-color: #fff;
+    padding: 60px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+.login-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.login-container button {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.login-container .remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.login-container .remember-me input {
+    margin-right: 5px;
+}
+.login-container .social-login {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+/******************Icono de Google************************/
+.login-container .social-login button {
+    background-color: #ff4a36aa; 
+    width: 48%;
+}
+/******************Icono de facebook************************/
+.login-container .social-login button.facebook {
+    background-color: #4285f4; 
+}
+.login-container .register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+.login-container .register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+.login-container .register-link a:hover {
+    text-decoration: underline;
+}
+  
+  /***************Inicio Pagina Registro Fallio**************************/
+
+
+.mensaje-error h2 {
+    font-size: 80px;
+    text-align: center;
+    color: #1F2B6C;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    text-decoration: double;
+}
+.boton-error {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.boton-error:hover {
+    background-color: #0056b3;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  margin-right: 20px;
+}
+
+.button {
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  justify-content: center;
+  background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 90px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 40px;
+    margin-top: 10px;
+}
+/****************Inicio Pagina Principal************************/
+.contenedor-pPrincipal {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+figure {
+  text-align: center;
+  margin: 0;
+}
+
+figure img {
+  width: 275px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+figure img:hover {
+  transform: scale(1.05);
+}
+
+figcaption {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

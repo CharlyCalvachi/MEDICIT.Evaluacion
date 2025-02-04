@@ -1,0 +1,56 @@
+{% extends "medico/basemedico.html"%}
+
+{% block  principal%} 
+
+<section class="contenedor-perfil">
+    
+    <main>
+        <section class="perfilm">
+            {% if medicos.foto_perfil %}
+            <img src="{{ medicos.foto_perfil.url }}" alt="Foto de {{ medicos.nombres }}" class="imagen-perfil">
+        {% else %}
+            No disponible
+        {% endif %}
+            <div class="user-info">
+                <h2>{{ medicos.nombres }} {{ medicos.apellidos }}</h2>
+                <p>{{medicos.email }}</p>  <!-- Asegúrate de que el email esté en el modelo -->
+            </div>
+            <button class="editar-perfil">Editar Perfil</button>
+        </section>
+        <section class="personal-info">
+            <h3>Datos Personales</h3>
+            <form action="/iniciarSesion/">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" class="input-field" placeholder="Shina Mery" value="{{  medicos.nombres }}">
+                
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" class="input-field" placeholder="Torigama shuan" value="{{ medicos.apellidos }}">
+                
+                <label for="cedula">Número de Cédula:</label>
+                <input type="text" id="cedula" name="cedula" class="input-field" placeholder="1726125311" value="{{ medicos.num_documento }}">
+                
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" class="input-field" placeholder="0981051046" value="{{ medicos.telefono }}">
+            
+
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" class="input-field">
+                    <option value="masculino" {% if medicos.sexo == 'masculino' %}selected{% endif %}>Masculino</option>
+                    <option value="femenino" {% if medicos.sexo == 'femenino' %}selected{% endif %}>Femenino</option>
+                    <option value="otro" {% if medicos.sexo == 'otro' %}selected{% endif %}>Otro</option>
+                </select>
+                
+                <h3>Actualizar Contraseña</h3>
+                <label for="contraseña-actual">Contraseña Actual:</label>
+                <input type="password" id="contraseña-actual" name="contraseña-actual" class="input-field">
+                
+                <label for="nueva-contraseña">Nueva Contraseña:</label>
+                <input type="password" id="nueva-contraseña" name="nueva-contraseña" class="input-field">
+                
+                <button type="submit" class="boton-actualizarPerfil">Actualizar</button>
+            </form> 
+        </section>
+    </main>
+</section>
+
+{% endblock %} 

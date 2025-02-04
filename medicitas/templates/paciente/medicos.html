@@ -1,0 +1,23 @@
+{% extends "paciente/base.html" %}
+{% block principal %}
+<main>
+    <section class="doctores">
+        {% for medico in medicos %}
+        <article class="campo-doctor">
+            <img src="{{ medico.foto_perfil.url }}" alt="{{ medico.nombres }} {{ medico.apellidos }}" {% if not medico.foto_perfil %}style="display:none;"{% endif %}>
+            <h2>{{ medico.nombres }} {{ medico.apellidos }}</h2>
+            <p><b>Especialidades:</b> 
+                {% for especialidad in medico.especialidades.all %}
+                    {{ especialidad.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p><b>Horario de Atención:</b> {{ medico.horario_atencion }}</p>
+            <p><b>Teléfono:</b> {{ medico.telefono }}</p>
+            <p><b>Email:</b> {{ medico.email }}</p>
+        </article>
+        {% empty %}
+        <p>No hay médicos registrados.</p>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}

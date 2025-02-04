@@ -1,0 +1,103 @@
+{% extends "paciente/base.html" %}
+{% block principal %}
+<section class="registro-cita">
+    <div class="formulario-cita-container">
+        <h2>Registro de Cita Médica</h2>
+        <form action="{% url 'registrar_cita' %}" method="post" class="formulario-cita">
+            {% csrf_token %}
+            <div class="formulario-cita-campo">
+                <label for="paciente" class="formulario-cita-label">Paciente:</label>
+                <select id="paciente" name="paciente" class="formulario-cita-select" disabled>
+                    <option value="{{ request.user.paciente.id_paciente }}">{{ request.user.paciente.nombres }} {{ request.user.paciente.apellidos }}</option>
+                </select>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="especialidad" class="formulario-cita-label">Especialidad:</label>
+                <select id="especialidad" name="especialidad" class="formulario-cita-select" onchange="cargarMedicos(this.value)">
+                    <option value="">Seleccione una especialidad</option>
+                    {% for especialidad in especialidades %}
+                        <option value="{{ especialidad.id }}">{{ especialidad.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="medico" class="formulario-cita-label">Médico:</label>
+                <select id="medico" name="medico" class="formulario-cita-select" onchange="cargarDisponibilidad(this.value)">
+                    <option value="">Seleccione un médico</option>
+                </select>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="fecha" class="formulario-cita-label">Fecha de la Cita:</label>
+                <input type="date" id="fecha" name="fecha" class="formulario-cita-input" required>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="hora" class="formulario-cita-label">Hora de la Cita:</label>
+                <select id="hora" name="hora" class="formulario-cita-select" required>
+                    <option value="">Seleccione una hora</option>
+                </select>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="sintomas" class="formulario-cita-label">Síntomas:</label>
+                <textarea id="sintomas" name="sintomas" rows="4" cols="50" class="formulario-cita-textarea" required></textarea>
+            </div>
+
+            <div class="formulario-cita-campo">
+                <label for="enfermedad" class="formulario-cita-label">¿Tiene COVID-19 o Influenza?</label>
+                <select id="enfermedad" name="enfermedad" class="formulario-cita-select">
+                    <option value="ninguna">Ninguna</option>
+                    <option value="covid">COVID-19</option>
+                    <option value="influenza">Influenza</option>
+                </select>
+            </div>
+
+            <div class="formulario-cita-botones">
+                <input type="submit" value="Registrar" class="formulario-cita-boton">
+                <input type="button" value="Cancelar" class="formulario-cita-boton-cancelar" onclick="window.location.href='/inicio/';">
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+function cargarMedicos(especialidadId) {
+    // Lógica para cargar médicos de la especialidad seleccionada
+    fetch(`/api/medicos/${especialidadId}/`)
+        .then(response => response.json())
+        .then(data => {
+            const medicoSelect = document.getElementById('medico');
+            medicoSelect.innerHTML = '<option value="">Seleccione un médico</option>';
+            data.forEach(medico => {
+                medicoSelect.innerHTML += `<option value="${medico.id}">${medico.nombre}</option>`;
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar médicos:', error);
+        });
+}
+
+function cargarDisponibilidad(medicoId) {
+    const fecha = document.getElementById('fecha').value;
+    if (fecha) {
+        fetch(`/api/disponibilidad/${medicoId}/${fecha}/`)
+            .then(response => response.json())
+            .then(data => {
+                const horaSelect = document.getElementById('hora');
+                horaSelect.innerHTML = '<option value="">Seleccione una hora</option>';
+                data.forEach(hora => {
+                    horaSelect.innerHTML += `<option value="${hora}">${hora}</option>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error al cargar las horas disponibles:', error);
+            });
+    } else {
+        alert("Por favor, selecciona una fecha primero.");
+    }
+}
+</script>
+{% endblock %}

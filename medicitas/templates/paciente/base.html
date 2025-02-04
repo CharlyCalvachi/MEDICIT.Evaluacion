@@ -1,0 +1,60 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDICIT_LOJA</title>
+    <link rel="stylesheet" href="{% static '/css/estilos.css' %}">
+    
+</head>
+<body>
+    <header>
+        <section>
+            <a href="/inicio/"><img src="/static/img/logomedicit.png" alt="Logo del Hospital" class="header-logo"></a>
+            <div class="header-info">
+                <img src="/static/img/icono telefono.png" alt="logo de telefono" class="telefono">
+                <p>EMERGENCIA<br> 555-1234</p>
+                <img src="/static/img/icono relog.png" alt="logo de telefono" class="telefono">
+                <p>DISPONIBILIDA<br> 24/7</p> 
+                <img src="/static/img/icono ubicacion.png" alt="logo de telefono" class="telefono">
+                <p>LOCALIZACION<br> Loja</p>
+             </div>
+  <h1 class="header-title">MEDI</h1><h1 class="header-title2">CIT</h1>
+        </section>
+    <nav>
+        <form class="search-form">
+            <input type="text" placeholder= "Buscar..." class="search-input">
+            <button type="submit" class="search-button">
+                <img src="/static/img/icono-buscar.png" alt="Icono de búsqueda" class="search-icon">
+            </button>
+          </form>
+        <a href="/inicio/">Inicio</a>
+        <a href="/medicos/">Medicos</a>
+        <a href="/agendarCita/">Agendar cita</a>
+        <a href="/citasAgendadas/">Citas Agendadas</a>
+        <a href="/principal/">iniciar sesion</a>
+        <a href="/perfil/"><img src="/static/img/icino-perfil.png" alt="Icono de búsqueda" class="icon-perfil"></a>
+    </nav>
+    
+    </header>
+
+    {% block  principal%}  {% endblock %}
+    {% block  sidevar%}  {% endblock %}
+
+    <footer>
+        <div class="footer-content">
+            <p><b>Direccion:</b> Via Olmedo y Arrayanes</p>
+            <p><b>Correo:</b> hospital_isidro_ayora_loja@gmail.com</p>
+            <p><b>Telefono:</b> (02)5555555</p>
+            <div class="footer-social">
+                <img src="/static/img/icono-facebook.png" alt="icono de facebook" class="social-icon">
+                <img src="/static/img/icono-instagram.png" alt="icono de instagram" class="social-icon">
+            </div>
+        </div>
+    </footer>
+  
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+<section class="contenedor-editar-estado">
+    <div class="container-editar-estado-container">
+        <h1 class="editar-estado-title">Editar Estado del Paciente</h1>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }} editar-estado-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <form method="POST" class="editar-estado-form" novalidate>
+            {% csrf_token %}
+            
+            <div class="editar-estado-fields">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+    
+            <button type="submit" class="btn btn-primary editar-estado-submit">Actualizar Estado</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+<section class="contenedor-gestionar-estado">
+    <div class="container-gestionar-estado-container">
+        <h1 class="gestionar-estado-title">Registrar Estado del Paciente</h1>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }} gestionar-estado-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <form method="POST" class="gestionar-estado-form" novalidate>
+            {% csrf_token %}
+            
+            <div class="gestionar-estado-fields">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+    
+            <button type="submit" class="btn btn-primary gestionar-estado-submit">Guardar Estado</button>
+        </form>
+
+        <h2 class="gestionar-estado-list-title">Pacientes Registrados</h2>
+        <table class="table-gestionar-estado">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estado in estados %}
+                    <tr>
+                        <td>{{ estado.paciente.nombres }} {{ estado.paciente.apellidos }}</td>
+                        <td>
+                             <a href="{% url 'editar_estado_paciente' estado.id %}" class="btn btn-edit gestionar-estado-edit">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

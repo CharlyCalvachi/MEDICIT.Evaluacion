@@ -1,0 +1,115 @@
+
+{% extends "base1.html" %}
+{% load static %}
+
+{% block principal2 %}  
+<section class="contenedor-registro">
+    <article class="formulario-registro">
+        <h1>Registro</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.tipo_perfil.label }}
+                    {{ form.tipo_perfil }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.tipo_documento.label }}
+                    {{ form.tipo_documento }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.num_documento.label }}
+                    {{ form.num_documento }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.nombres.label }}
+                    {{ form.nombres }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.apellidos.label }}
+                    {{ form.apellidos }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.telefono.label }}
+                    {{ form.telefono }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.direccion.label }}
+                    {{ form.direccion }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.email.label }}
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.fecha_nacimiento.label }}
+                    {{ form.fecha_nacimiento }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.sexo.label }}
+                    {{ form.sexo }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.username.label }}
+                    {{ form.username }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.password.label }}
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                
+                <div class="grupo-formulario">
+                    {{ form.password_confirm.label }}
+                    {{ form.password_confirm }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.foto_perfil.label }}
+                    {{ form.foto_perfil }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.codigo_secreto.label }}
+                    <input type="password" name=
+                    "{{ form.codigo_secreto.html_name }}"
+                     id="{{ form.codigo_secreto.id_for_label }}" required>
+                </div>
+            </div>
+            <div class="botones-formulario">
+                <button type="submit" class="boton-registrar">Registrarse</button>
+                <a href="/registroFallido/" class="boton-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </article>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipoPerfil = document.querySelector('select[name="tipo_perfil"]');
+        const codigoSecretoField = document.getElementById('codigo-secreto-field');
+
+        function toggleCodigoSecreto() {
+            if (tipoPerfil.value === 'medico' || tipoPerfil.value === 'administrador') {
+                codigoSecretoField.style.display = 'block';
+            } else {
+                codigoSecretoField.style.display = 'none';
+            }
+        }
+
+        toggleCodigoSecreto();
+        tipoPerfil.addEventListener('change', toggleCodigoSecreto);
+    });
+</script>
+{% endblock %}

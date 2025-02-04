@@ -1,0 +1,50 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+
+<section class="contenedor-citas-Agendadas">
+    <div class="tabla-citas-container">
+        <h2>Citas Programadas</h2>
+
+        {% if citas %}
+            <table class="tabla-citas">
+                <thead>
+                    <tr>
+                        <th>Nombre Paciente</th>
+                        <th>Apellido Paciente</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Síntomas</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cita in citas %}
+                        <tr>
+                            <td>{{ cita.paciente.nombres }}</td>
+                            <td>{{ cita.paciente.apellidos }}</td>
+                            <td>{{ cita.fecha_hora|date:"Y-m-d" }}</td>
+                            <td>{{ cita.fecha_hora|time:"H:i" }}</td>
+                            <td>{{ cita.sintomas }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'actualizar_estado_cita' cita.id %}">
+                                    {% csrf_token %}
+                                    <select class="opciones_estado" name="estado">
+                                        <option value="programada" {% if cita.estado == 'programada' %}selected{% endif %}>Programada</option>
+                                        <option value="confirmada" {% if cita.estado == 'confirmada' %}selected{% endif %}>Confirmada</option>
+                                        <option value="realizada" {% if cita.estado == 'realizada' %}selected{% endif %}>Realizada</option>
+                                        <option value="cancelada" {% if cita.estado == 'cancelada' %}selected{% endif %}>Cancelada</option>
+                                    </select>
+                                    <button class="actualizar_estado" type="submit">Actualizar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay citas programadas.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

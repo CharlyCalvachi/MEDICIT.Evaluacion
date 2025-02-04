@@ -1,0 +1,163 @@
+{% extends "administrador/baseadministrador.html" %}
+{% load static %}
+{% block administrador %}  
+<section class="contenedor-registro">
+    <article class="formulario-registro">
+        <h1>Registro de Médicos</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.tipo_perfil.label }}
+                    {{ form.tipo_perfil }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.tipo_documento.label }}
+                    {{ form.tipo_documento }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.num_documento.label }}
+                    {{ form.num_documento }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.nombres.label }}
+                    {{ form.nombres }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.apellidos.label }}
+                    {{ form.apellidos }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.telefono.label }}
+                    {{ form.telefono }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.direccion.label }}
+                    {{ form.direccion }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.email.label }}
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.fecha_nacimiento.label }}
+                    {{ form.fecha_nacimiento }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.sexo.label }}
+                    {{ form.sexo }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.username.label }}
+                    {{ form.username }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.password.label }}
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.password_confirm.label }}
+                    {{ form.password_confirm }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.codigo_secreto.label }}
+                    <input type="password" name=
+                    "{{ form.codigo_secreto.html_name }}"
+                     id="{{ form.codigo_secreto.id_for_label }}" required>
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.foto_perfil.label }}
+                    {{ form.foto_perfil }}
+                </div>
+                <div class="grupo-formulario">
+                    {{ form.horario_atencion.label }}  <!-- Campo para seleccionar horario de atención -->
+                    {{ form.horario_atencion }}
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    {{ form.especialidades.label }}  <!-- Campo para seleccionar especialidades -->
+                    {{ form.especialidades }}
+                </div>
+            </div>
+            <div class="botones-formulario">
+                <button type="submit" class="boton-registrar">Registrar</button>
+                <a href="/admin-dashboard/" class="boton-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </article>
+
+    
+</section>
+<section class="contenedor-medicos">
+    <!-- Tabla de Médicos -->
+    <article >
+        <h2>Lista de Médicos Registrados</h2>
+        <table class="table-medicos">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Especialidad</th>
+                    <th>Horario de Atención</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medico in medicos %}
+                <tr>
+                    <td>{{ medico.nombres }}</td>
+                    <td>{{ medico.apellidos }}</td>
+                    <td>
+                        {% for especialidad in medico.especialidades.all %}
+                            {{ especialidad.nombre }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ medico.horario_atencion }}</td>
+                    <td>
+                        <button class="link-editarMedico"><a href="{% url 'editar_medico' medico.id_medico %}"class="link-editarMedico">Editar</a></button>
+                        <button class="link-eliminarMedico"><a href="{% url 'eliminar_medico' medico.id_medico %}" onclick="return confirm('¿Estás seguro de que quieres eliminar este médico?');">Eliminar</a></button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay médicos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipoPerfil = document.querySelector('select[name="tipo_perfil"]');
+        const codigoSecretoField = document.getElementById('codigo-secreto-field');
+
+        function toggleCodigoSecreto() {
+            if (tipoPerfil.value === 'medico' || tipoPerfil.value === 'administrador') {
+                codigoSecretoField.style.display = 'block';
+            } else {
+                codigoSecretoField.style.display = 'none';
+            }
+        }
+
+        toggleCodigoSecreto();
+        tipoPerfil.addEventListener('change', toggleCodigoSecreto);
+    });
+</script>
+{% endblock %}

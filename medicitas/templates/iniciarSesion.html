@@ -1,0 +1,56 @@
+{% extends "base1.html" %}
+{% block principal2 %} 
+<section class="inicio-secion">
+    <img src="/static/img/iniciar-sesion.png" alt="iniciar sesion">
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Correo Electrónico o Nombre de Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <div class="remember-me">
+                <input type="checkbox" name="remember">
+                <label for="remember">Recordar contraseña</label>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <div class="social-login">
+            <button type="button" onclick="location.href='/inicio/'">Google</button>
+            <button type="button" class="facebook" onclick="location.href='/inicio/'">Facebook</button>
+        </div>
+        <div class="register-link">
+            <p>¿No tienes una cuenta? <a href="/registro/">Regístrate</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+<!-- 
+<section class="inicio-secion">
+  <img src="/static/img/iniciar-sesion.png" alt="iniciar sesion">
+  <div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form  method="post">
+        <input type="email" name="email" placeholder="Correo Electrónico" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <div class="remember-me">
+            <input type="checkbox" name="remember">
+            <label for="remember">Recordar contraseña </label>
+        </div>
+        <button type="submit" >Iniciar Sesión</button>
+    </form>
+    <div class="social-login">
+        <button type="button" onclick="location.href='/inicio/'">Google</button>
+        <button type="button" class="facebook" onclick="location.href='/inicio/'">Facebook</button>
+    </div>
+    <div class="register-link">
+        <p>¿No tienes una cuenta? <a href="/registrarse/">Regístrate</a></p>
+    </div>
+</div>
+
+</section>
+-->

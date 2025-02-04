@@ -1,0 +1,33 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+<section class="contenedor-pacientes">
+    <div class="table-pacientes-container">
+        <h2>Pacientes Registrados</h2>
+        <table class="table-pacientes">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Edad</th>
+                    <th>Número de Documento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                    <tr>
+                        <td>{{ paciente.nombres }}</td>
+                        <td>{{ paciente.apellidos }}</td>
+                        <td>{{ paciente.edad }}</td>
+                        <td>{{ paciente.num_documento }}</td>
+                        <td>
+                            <a href="/historial" class="btn-ir-historial">Ir a Historial</a>
+                            
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

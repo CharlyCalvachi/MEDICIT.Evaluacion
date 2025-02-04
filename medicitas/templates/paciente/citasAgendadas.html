@@ -1,0 +1,83 @@
+{% extends "paciente/base.html" %}
+{% block principal %}
+
+<section class="contenedor-citas-Agendadas">
+    <div class="tabla-citas-container">
+        <h2>Mis Citas Agendadas</h2>
+        <table class="tabla-citas">
+            <thead>
+                <tr>
+                    <th>Médico</th>
+                    <th>Especialidad</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas %}
+                <tr>
+                    <td>{{ cita.medico.nombres }} {{ cita.medico.apellidos }}</td>
+                    <td>{{ cita.especialidad.nombre }}</td>
+                    <td>{{ cita.fecha_hora.date }}</td>
+                    <td>{{ cita.fecha_hora.time|date:"H:i" }}</td>
+                    <td>
+                        <button class="btn-editar" 
+                                data-id="{{ cita.id }}" 
+                                data-fecha="{{ cita.fecha_hora.date|date:'Y-m-d' }}" 
+                                data-hora="{{ cita.fecha_hora.time|date:'H:i' }}" 
+                                data-sintomas="{{ cita.sintomas }}"
+                                onclick="editarCita(this)">Editar</button>
+                        <form action="{% url 'eliminar_cita' cita.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cita?');">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No tienes citas agendadas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div id="form-editar" class="form-editar" style="display: none; margin-top: 20px;">
+            <h3>Editar Cita</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="cita_id" id="cita_id">
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" name="fecha" id="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <input type="time" name="hora" id="hora" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="sintomas">Síntomas:</label>
+                    <textarea name="sintomas" id="sintomas" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn-actualizar">Actualizar Cita</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+function editarCita(button) {
+    const id = button.getAttribute('data-id');
+    const fecha = button.getAttribute('data-fecha');
+    const hora = button.getAttribute('data-hora');
+    const sintomas = button.getAttribute('data-sintomas');
+
+    document.getElementById('cita_id').value = id;
+    document.getElementById('fecha').value = fecha;
+    document.getElementById('hora').value = hora;
+    document.getElementById('sintomas').value = sintomas;
+    document.getElementById('form-editar').style.display = 'block';
+}
+</script>
+
+{% endblock %}

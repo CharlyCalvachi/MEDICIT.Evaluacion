@@ -1,0 +1,21 @@
+{% extends "paciente/base.html" %}
+{% block principal %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        <label for="sintomas">Síntomas:</label>
+        <input type="text" name="sintomas" value="{{ cita.sintomas }}" required>
+    </div>
+    <div>
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" value="{{ cita.fecha_hora.date }}" required>
+    </div>
+    <div>
+        <label for="hora">Hora:</label>
+        <input type="time" name="hora" value="{{ cita.fecha_hora.time }}" required>
+    </div>
+    <button type="submit">Actualizar Cita</button>
+</form>
+
+{% endblock %}

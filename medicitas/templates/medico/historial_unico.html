@@ -1,0 +1,199 @@
+{% extends "medico/basemedico.html" %}
+{% block principal %}
+<section class="contenedor-historial-unico">
+    <div class="historial-unico-container">
+        <h1 class="titulo-historial">Historial Médico</h1>
+        
+        <form method="GET" id="paciente-selector" class="form-selector">
+            <label for="paciente" class="label-selector">Selecciona un Paciente:</label>
+            <select name="paciente_id" id="paciente" class="select-paciente" onchange="this.form.submit()">
+                <option value="">-- Selecciona un Paciente --</option>
+                {% for p in pacientes %}
+                    <option value="{{ p.id_paciente }}" {% if p.id_paciente == paciente.id_paciente %}selected{% endif %}>
+                        {{ p.nombres }} {{ p.apellidos }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        {% if paciente %}
+            <h2 class="subtitulo-datos">Datos del Paciente</h2>
+            <table class="tabla-datos">
+                <tbody>
+                    <tr>
+                        <th class="th-dato">Foto de Perfil</th>
+                        <td class="td-dato">
+                            {% if paciente.foto_perfil %}
+                                <img src="{{ paciente.foto_perfil.url }}" alt="Foto de {{ paciente.nombres }}" class="foto-perfil">
+                            {% else %}
+                                No disponible
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Nombre</th>
+                        <td class="td-dato">{{ paciente.nombres }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Apellidos</th>
+                        <td class="td-dato">{{ paciente.apellidos }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Número de Documento</th>
+                        <td class="td-dato">{{ paciente.num_documento }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Fecha de Nacimiento</th>
+                        <td class="td-dato">{{ paciente.fecha_nacimiento }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Edad</th>
+                        <td class="td-dato">{{ edad }} años</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Sexo</th>
+                        <td class="td-dato">{{ paciente.sexo }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Dirección</th>
+                        <td class="td-dato">{{ paciente.direccion }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Teléfono</th>
+                        <td class="td-dato">{{ paciente.telefono }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-dato">Email</th>
+                        <td class="td-dato">{{ paciente.email }}</td>
+                    </tr>
+
+                    
+                </tbody>
+            </table>
+
+            <h2 class="subtitulo-estado">Historia Clinica</h2>
+            <table class="tabla-estado">
+                <tbody>
+                    {% if estado %}
+                        <tr>
+                            <th class="th-estado">Estatura</th>
+                            <td class="td-estado">{{ estado.estatura }} cm</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Peso</th>
+                            <td class="td-estado">{{ estado.peso }} kg</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Tipo de Sangre</th>
+                            <td class="td-estado">{{ estado.tipo_sangre }}</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Ritmo Cardíaco</th>
+                            <td class="td-estado">{{ estado.ritmo_cardiaco }} bpm</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Temperatura</th>
+                            <td class="td-estado">{{ estado.temperatura }} °C</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Presión Arterial</th>
+                            <td class="td-estado">{{ estado.presion_arterial }}</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Enfermedades</th>
+                            <td class="td-estado">{{ estado.enfermedades }}</td>
+                        </tr>
+                        <tr>
+                            <th class="th-estado">Observaciones</th>
+                            <td class="td-estado">{{ estado.observaciones }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2" class="td-vacio">No hay estado registrado para este paciente.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <h2 class="subtitulo-citas">Citas Médicas</h2>
+            <table class="tabla-datosp">
+                <thead>
+                    <tr>
+                        <th class="th-datosp">Fecha y Hora</th>
+                        <th class="th-datosp">Síntomas</th>
+                        <th class="th-datosp">Estado</th>
+                        <th class="th-datosp">Médico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cita in citas %}
+                        <tr>
+                            <td class="td-datosp">{{ cita.fecha_hora }}</td>
+                            <td class="td-datosp">{{ cita.sintomas }}</td>
+                            <td class="td-datosp">{{ cita.estado }}</td>
+                            <td class="td-datosp">{{ cita.medico }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="td-vacio">No hay citas registradas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2 class="subtitulo-recetas">Recetas</h2>
+            <table class="tabla-datosp">
+                <thead>
+                    <tr>
+                        <th class="th-datosp">Medicamento</th>
+                        <th class="th-datosp">Dosis</th>
+                        <th class="th-datosp">Frecuencia</th>
+                        <th class="th-datosp">Fecha Inicio</th>
+                        <th class="th-datosp">Fecha Fin</th>
+                        <th class="th-datosp">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for receta in recetas %}
+                        <tr>
+                            <td class="td-datosp">{{ receta.medicamento }}</td>
+                            <td class="td-datosp">{{ receta.dosis }}</td>
+                            <td class="td-datosp">{{ receta.frecuencia }}</td>
+                            <td class="td-datosp">{{ receta.fecha_inicio }}</td>
+                            <td class="td-datosp">{{ receta.fecha_fin }}</td>
+                            <td class="td-datosp">{{ receta.estado }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="td-vacio">No hay recetas registradas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2 class="subtitulo-diagnosticos">Diagnósticos</h2>
+            <table class="tabla-datosp">
+                <thead>
+                    <tr>
+                        <th class="th-datosp">Fecha</th>
+                        <th class="th-datosp">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for diagnostico in diagnosticos %}
+                        <tr>
+                            <td class="td-datosp">{{ diagnostico.fecha_diagnostico }}</td>
+                            <td class="td-datosp">{{ diagnostico.descripcion }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2" class="td-vacio">No hay diagnósticos registrados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

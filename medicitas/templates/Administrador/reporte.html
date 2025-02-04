@@ -1,0 +1,28 @@
+{% extends "administrador/baseadministrador.html" %}
+{% load static %}
+{% block administrador %}
+<section class="contenedor-reporte">
+    <h1 class="titulo-reporte">Reporte de Citas Médicas</h1>
+    <table class="tabla-reporte">
+        <thead class="encabezado-tabla">
+            <tr>
+                <th class="columna-especialidad">Especialidad</th>
+                <th class="columna-total-citas">Número de Citas</th>
+                <th class="columna-influenza">Número de Citas con Influenza</th>
+                <th class="columna-covid">Número de Citas con COVID-19</th>
+            </tr>
+        </thead>
+        <tbody class="cuerpo-tabla">
+            {% for data in report_data %}
+            <tr class="fila-datos">
+                <td class="dato-especialidad">{{ data.especialidad }}</td>
+                <td class="dato-total-citas">{{ data.total_citas }}</td>
+                <td class="dato-influenza">{{ data.total_influenza }}</td>
+                <td class="dato-covid">{{ data.total_covid }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button class="boton-imprimir" onclick="window.print()">Imprimir Reporte</button>
+</section>
+{% endblock %}

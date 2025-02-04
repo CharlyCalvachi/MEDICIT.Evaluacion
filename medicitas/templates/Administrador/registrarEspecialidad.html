@@ -1,0 +1,42 @@
+{% extends "administrador/baseadministrador.html" %}
+{% block administrador %}
+<div class="container">
+    <h1>Registrar Nueva Especialidad</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-registro">Registrar Especialidad</button>
+    </form>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h2>Especialidades Registradas</h2>
+    <table class="table-especialidades">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for especialidad in especialidades %}
+                <tr>
+                    <td>{{ especialidad.nombre }}</td>
+                    <td>{{ especialidad.descripcion }}</td>
+                    <td>
+                        <button class="link-editar"><a href="{% url 'editar_especialidad' especialidad.id %}" >Editar</a></button>
+                        <button class="link-eliminar"><a href="{% url 'eliminar_especialidad' especialidad.id %}"  onclick="return confirm('¿Estás seguro de que deseas eliminar esta especialidad?');">Eliminar</a></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
